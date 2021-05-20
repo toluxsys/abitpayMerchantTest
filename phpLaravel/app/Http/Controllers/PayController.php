@@ -34,19 +34,23 @@ class PayController extends Controller
             "txref": "' . $txref . '",
             "email": "' . $user->email . '",
             "amount": ' . $request->amount . ',
-            "redirect_url": "https://techplushost.com",
+            "redirect_url": "https://techplushost.com/api/abitcallback",
             "hook_url": "https://techplushost.com/api/abithook"
         }',
-        CURLOPT_HTTPHEADER => array(
-            'Authorization: mk_ef12fd23d9d47be5',
-            'Content-Type: application/json'
-        ),
+            CURLOPT_HTTPHEADER => array(
+                'Authorization: mk_ef12fd23d9d47be5',
+                'Content-Type: application/json'
+            ),
         ));
 
         $response = curl_exec($curl);
 
         curl_close($curl);
-        return $response;
+//        return $response;
+
+        $rep = json_decode($response, true);
+
+        redirect()->to($rep['data']['payment_url']);
 
         // return back()->with('success','Comment Posted Successfully');
     }
