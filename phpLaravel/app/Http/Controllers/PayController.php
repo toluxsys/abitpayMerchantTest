@@ -31,9 +31,9 @@ class PayController extends Controller
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => 'POST',
         CURLOPT_POSTFIELDS =>'{
-            "txref": $txref,
-            "email": $user->email,
-            "amount": $request->amount,
+            "txref": "tp1223yyierfyhje3e",
+            "email": "abituser@gmail.com",
+            "amount": 6,
             "redirect_url": "https://techplushost.com",
             "hook_url": "https://techplushost.com"
         }',
