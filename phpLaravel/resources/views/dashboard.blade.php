@@ -14,6 +14,11 @@
             </div>
         </div>
     </div>
+    <!-- Session Status -->
+        <x-auth-session-status class="mb-4" :status="session('status')" />
+
+        <!-- Validation Errors -->
+        <x-auth-validation-errors class="mb-4" :errors="$errors" />
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -39,4 +44,34 @@
             </div>
         </div>
     </div>
+
+    @php
+        $deposits = \App\Models\Deposit::where('id', Auth::user()->id)->latest()->get();
+    @endphp
+
+    <h1><center>Deposit History</center></h1>
+
+    @if (count($deposits) > 0)
+        @foreach ($deposits as $data)
+            <div class="py-12">
+                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                        <div class="p-6 bg-white border-b border-gray-200">
+                            Amount: ${{$data->amount}} || Crypto Value: {{$data->amount_paid}} {{$data->coin_paid}} || Trx: {{$data->trans_id}} || Payment Ref: {{$data->payment_ref}} || Status: @if($data->status ==1) <font color="green">Successful</font> @else <font color="red">Pending</font> @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    @else
+        <div class="py-12">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-6 bg-white border-b border-gray-200">
+                        <center>No Deposit Yet</center>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
 </x-app-layout>

@@ -15,7 +15,7 @@ class HookController extends Controller
 //        "merchant_id": "6082e85e0f950c09f83e575d",
 //        "trans_id": "meref8382328ffea12364378904561718521",
 //        "payment_ref": "LkOltSyWpKrf21Soyqin72sR445Afv",
-//        "email": "odejinmisa@newwavesecosystem.com",
+//        "email": "user@abitpay.com",
 //        "usdamount": "5",
 //        "redirect_url": "https://hello.com",
 //        "hook_url": "https://hook.com",

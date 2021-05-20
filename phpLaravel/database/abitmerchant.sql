@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 19, 2021 at 02:50 PM
+-- Generation Time: May 21, 2021 at 01:13 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.4.16
 
@@ -20,6 +20,25 @@ SET time_zone = "+00:00";
 --
 -- Database: `abitmerchant`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `deposits`
+--
+
+CREATE TABLE `deposits` (
+  `id` int(24) NOT NULL,
+  `user_id` int(24) NOT NULL,
+  `amount` varchar(191) NOT NULL,
+  `trans_id` text NOT NULL,
+  `payment_ref` text DEFAULT NULL,
+  `amount_paid` varchar(191) DEFAULT NULL,
+  `coin_paid` varchar(191) DEFAULT NULL,
+  `status` int(4) NOT NULL DEFAULT 0,
+  `created_at` varchar(191) NOT NULL,
+  `updated_at` varchar(191) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -100,6 +119,12 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `ba
 --
 
 --
+-- Indexes for table `deposits`
+--
+ALTER TABLE `deposits`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -128,6 +153,12 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `deposits`
+--
+ALTER TABLE `deposits`
+  MODIFY `id` int(24) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
