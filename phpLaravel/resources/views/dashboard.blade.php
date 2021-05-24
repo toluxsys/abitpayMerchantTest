@@ -46,7 +46,7 @@
     </div>
 
     @php
-        $deposits = \App\Models\Deposit::where('id', Auth::user()->id)->latest()->get();
+        $deposits = \App\Models\Deposit::where('user_id', auth()->user()->id)->latest()->get();
     @endphp
 
     <h1><center>Deposit History</center></h1>

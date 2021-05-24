@@ -37,9 +37,10 @@ class PayController extends Controller
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => 'POST',
         CURLOPT_POSTFIELDS =>'{
-            "txref": "' . $txref . '",
+            "txid": "' . $txref . '",
             "email": "' . $user->email . '",
             "amount": ' . $request->amount . ',
+            "payment_method" : ["TATN", "BTC", "TAT", "ETH"], //["all"] for all wallets
             "redirect_url": "https://techplushost.com/api/abitcallback",
             "hook_url": "https://techplushost.com/api/abithook"
         }',
@@ -56,9 +57,7 @@ class PayController extends Controller
 
         $rep = json_decode($response, true);
 
-        redirect()->to($rep['data']['payment_url']);
-
-        // return back()->with('success','Comment Posted Successfully');
+        return redirect()->away($rep['data']['payment_url']);
     }
 
     public function redirectcallback($ref)
@@ -109,7 +108,7 @@ class PayController extends Controller
         //continue from here
         $rep = json_decode($response, true);
 
-        $deposit = Deposit::where('trans_id', $rep['data']['amount'])->where('status',0)->first();
+        $deposit = Deposit::where('trans_id', $rep['data']['trans_id'])->where('status',0)->first();
         $deposit->payment_ref = $rep['data']['payment_ref'];
         $deposit->amount_paid = $rep['data']['amountpaid'];
         $deposit->coin_paid = $rep['data']['wallet'];
