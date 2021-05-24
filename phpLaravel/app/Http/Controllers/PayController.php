@@ -37,9 +37,10 @@ class PayController extends Controller
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => 'POST',
         CURLOPT_POSTFIELDS =>'{
-            "txref": "' . $txref . '",
+            "txid": "' . $txref . '",
             "email": "' . $user->email . '",
             "amount": ' . $request->amount . ',
+            "payment_method" : ["TATN", "BTC", "TAT", "ETH"], //["all"] for all wallets
             "redirect_url": "https://techplushost.com/api/abitcallback",
             "hook_url": "https://techplushost.com/api/abithook"
         }',
